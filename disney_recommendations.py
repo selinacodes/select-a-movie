@@ -3,6 +3,7 @@ from datetime import datetime
 import sys
 import os
 import re
+import pprint
 
 file_path = sys.argv[1]
 
@@ -36,17 +37,17 @@ with open(file_path, 'r') as f:
             else:
                 movie_choices[genre] = [choice]
 
-    genre = input('What genre would you like to watch?')
+    genre = input('What genre would you like to watch? ')
     if genre not in movie_choices:
         print('Your chosen genre is unavailable.', file=sys.stderr)
         sys.exit()
 
-    media = input('Do you want a movie ("movie") or a tv show ("show")?')
+    media = input('Do you want a movie (write "movie") or a tv show (write "show")? ')
     if media != 'show' and media != 'movie':
         print('Your chosen media is unavailable.', file=sys.stderr)
         sys.exit()
 
-    years = input('Enter earliest release year and latest release year (e.g.: "1990, 2010"):').split(',')
+    years = input('Enter earliest release year and latest release year (e.g.: "1990, 2010" without the quotation marks.): ').split(',')
     if len(years) != 2:
         print('Enter only two years.', file=sys.stderr)
         sys.exit()
@@ -67,17 +68,4 @@ with open(file_path, 'r') as f:
                 continue
             to_watch.append(movie)
 
-    print(to_watch)
-
-
-
-    # # to_watch = []
-
-    # # for choice in movie_choices[genre]:
-    # #     if choice[1] == media:
-    # #         continue
-    # #     if choice[3] < range_year:
-    # #         continue
-    # #     to_watch.append(choice)
-
-    # print(to_watch)
+    pprint.pprint(to_watch)
